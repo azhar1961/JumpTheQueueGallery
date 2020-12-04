@@ -1,0 +1,42 @@
+
+<div class="row pt-5">
+  <div class="col-md-6 mx-auto ">
+    <div class="card rounded-0 bg-light border-primary ">
+      <div class="card-header border-primary">
+        <h3 class="mb-0">Login</h3> 
+      </div>
+      <div class="card-body">
+        <form #loginform="ngForm" (ngSubmit)="loginSubmit(loginform.form.value)">
+          <small class="text-danger">{{msg}}</small>
+          <div class="form-group">
+            <label>Email:</label>
+            <input type="text" name="username" #username="ngModel" required 
+             pattern="^([\w]*[\w\.]*(?!\.)@([a-zA-Z]+)([\.])([a-zA-Z]+))"
+             [class.is-invalid]="username.invalid && username.touched" 
+            class="form-control" placeholder="Enter your Email" ngModel>
+            <div *ngIf="username.errors && (username.invalid && username.touched)">
+              <small class="text-danger" *ngIf="username.errors.required">Email is required</small>
+              <small class="text-danger" *ngIf="username.errors.pattern">Enter valid Email Id</small>
+            </div>  
+          </div> 
+          <div class="form-group">
+            <label>Password:</label>
+            <input type="password" name="password" #password="ngModel" class="form-control" required pattern="^((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[!,@,#,$,&,*,_,-])(?=.*[a-z]).{8,}$"
+            placeholder="Enter your password" ngModel [class.is-invalid]="password.invalid && password.touched">
+            <div *ngIf="password.errors && (password.invalid && password.touched)">
+              <small class="text-danger" *ngIf="password.errors.required">Password is required</small>
+              <small class="text-danger" *ngIf="password.errors.pattern">Password should have Minimum eight characters, one upper case, one lower case, one number and a special character.</small>
+            </div>  
+          </div>
+          <button [disabled]="loginform.form.invalid"  type="submit" class="btn btn-success">Login</button>
+        </form>
+        <a class="float-right text-primary"  [routerLink]="['/registration']" ><h6>New User? Register Here!</h6></a>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+
+
+

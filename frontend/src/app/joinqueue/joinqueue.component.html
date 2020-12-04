@@ -1,0 +1,14 @@
+<div class="row pt-5">
+    <div class="card text-center mx-auto" style="width: 20rem;">
+        <div class="card-body">
+        <h2>{{event.eventName}}</h2><br><br>
+        <h5>Currently available Queue</h5>
+        <h1 class="text-primary">{{currentlyAvailableQueue}}</h1><br>
+        <button (click)="joinQueue()" type="submit" class="btn btn-success">JOIN QUEUE</button>
+        </div>
+    </div>
+</div><br><br>
+<a class="text-dark" align="center" (click)="goBackToEvents()" ><h6>Go Back to Events</h6></a>
+
+
+
