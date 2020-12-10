@@ -11,10 +11,10 @@ import { JoinCriteria } from '../../models/interface';
 })
 export class JoinqueueService {
 
-  
+  private baseUrl=environment.baseUrlRestServices;
   constructor(private http:HttpClient) { }
 
   joinQueue(criteria:JoinCriteria):Observable<any>{
-    return this.http.post<any>('http://localhost:8081/jtqbackend/services/rest/queuedetailmanagement/v1/queuedetail/',criteria)
+    return this.http.post<any>(`${this.baseUrl}`+'/queuedetailmanagement/v1/queuedetail/',criteria)
   }
 }

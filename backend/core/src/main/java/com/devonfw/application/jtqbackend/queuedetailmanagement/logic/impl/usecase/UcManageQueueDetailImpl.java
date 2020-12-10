@@ -3,15 +3,12 @@ package com.devonfw.application.jtqbackend.queuedetailmanagement.logic.impl.usec
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
@@ -45,13 +42,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
   private int visitorCount;
 
   @Override
-  public boolean deleteQueueDetail(long queueDetailId) {
+  public void deleteQueueDetail(long queueDetailId) {
 
     QueueDetailEntity queueDetail = getQueueDetailRepository().find(queueDetailId);
-    this.eventmanagement.decreaseEventVisitorCount(queueDetail.getEventId());
     getQueueDetailRepository().delete(queueDetail);
-    LOG.debug("The queueDetail with id '{}' has been deleted.", queueDetailId);
-    return true;
+    this.eventmanagement.decreaseEventVisitorCount(queueDetail.getEventId());
   }
 
   /**
@@ -59,76 +54,98 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
    *
    * @param QueueDetailEto. Return type of function is QueueDetailEto.
    */
+
   @Override
   public QueueDetailEto saveQueueDetail(QueueDetailEto queueDetail) {
 
-    Objects.requireNonNull(queueDetail, "queueDetail should not be null");
-
     QueueDetailEntity queueDetailEntity = getBeanMapper().map(queueDetail, QueueDetailEntity.class);
 
-    long eventId = queueDetailEntity.getEventId();
-    long visitorId = queueDetailEntity.getVisitorId();
-    QueueDetailSearchCriteriaTo queueDetailSearchCriteriaTo = setSearchCriteria(eventId, visitorId);
-
-    List<QueueDetailEto> queuedetailEtosInQueue = this.queuedetailmanagement
-        .findQueueDetails(queueDetailSearchCriteriaTo).getContent();
+    List<QueueDetailEto> queuedetailEtosInQueue = getListOfQueueDetailEto(queueDetailEntity);
 
     if (queuedetailEtosInQueue.isEmpty()) {
-      QueueDetailSearchCriteriaTo queueDetailSearchCriteriaToForEvent = setSearchCriteriaForEvent(eventId);
 
-      List<QueueDetailEto> eventqueuedetailEtosInQueue = this.queuedetailmanagement
-          .findQueueDetails(queueDetailSearchCriteriaToForEvent).getContent();
+      List<QueueDetailEto> eventqueuedetailEtosInQueue = getEventQueueDetailEtoList(queueDetailEntity);
 
-      if (eventqueuedetailEtosInQueue.isEmpty()) {
-        queueDetailEntity.setQueueNumber("Q000");
-      } else {
-        queueDetailEntity = setEventQueueDetails(eventqueuedetailEtosInQueue, queueDetailEntity);
-      }
+      queueDetailEntity = processQueueDetail(queueDetailEntity, eventqueuedetailEtosInQueue);
 
-      long eventid = queueDetailEntity.getEventId();
+      queueDetailEntity = getQueueDetailRepository().save(queueDetailEntity);
 
-      EventEto eventEto = this.eventmanagement.findEvent(eventid);
-      EventEntity eventEntity = getBeanMapper().map(eventEto, EventEntity.class);
-      this.visitorCount = eventEntity.getVisitorCount();
+      this.eventmanagement.increaseEventVisitorCount(queueDetailEntity.getEventId());
 
-      queueDetailEntity = setEventTimingInQueue(queueDetailEntity, this.visitorCount);
+      return getBeanMapper().map(queueDetailEntity, QueueDetailEto.class);
 
-      QueueDetailEntity resultEntity = saveNewEventDetails(queueDetailEntity);
-
-      return getBeanMapper().map(resultEntity, QueueDetailEto.class);
     } else {
       return queuedetailEtosInQueue.get(0);
     }
   }
 
-  private QueueDetailSearchCriteriaTo setSearchCriteria(long eventId, long visitorId) {
+  private List<QueueDetailEto> getListOfQueueDetailEto(QueueDetailEntity queueDetailEntity) {
+
+    QueueDetailSearchCriteriaTo searchCriteriaForQueueDetail = setSearchCriteria(queueDetailEntity);
+
+    List<QueueDetailEto> queuedetailEtosInQueue = this.queuedetailmanagement
+        .findQueueDetails(searchCriteriaForQueueDetail).getContent();
+    return queuedetailEtosInQueue;
+  }
+
+  private QueueDetailSearchCriteriaTo setSearchCriteria(QueueDetailEntity queueDetailEntity) {
 
     QueueDetailSearchCriteriaTo queueDetailSearchCriteriaTo = new QueueDetailSearchCriteriaTo();
-    queueDetailSearchCriteriaTo.setEventId(eventId);
-    queueDetailSearchCriteriaTo.setVisitorId(visitorId);
-    Pageable pageable = PageRequest.of(0, 1000);
-    queueDetailSearchCriteriaTo.setPageable(pageable);
+    queueDetailSearchCriteriaTo.setEventId(queueDetailEntity.getEventId());
+    queueDetailSearchCriteriaTo.setVisitorId(queueDetailEntity.getVisitorId());
 
     return queueDetailSearchCriteriaTo;
 
+  }
+
+  private List<QueueDetailEto> getEventQueueDetailEtoList(QueueDetailEntity queueDetailEntity) {
+
+    QueueDetailSearchCriteriaTo searchCriteriaForEvent = setSearchCriteriaForEvent(queueDetailEntity.getEventId());
+
+    List<QueueDetailEto> eventqueuedetailEtosInQueue = this.queuedetailmanagement
+        .findQueueDetails(searchCriteriaForEvent).getContent();
+    return eventqueuedetailEtosInQueue;
   }
 
   private QueueDetailSearchCriteriaTo setSearchCriteriaForEvent(long eventId) {
 
     QueueDetailSearchCriteriaTo queueDetailSearchCriteriaToForEvent = new QueueDetailSearchCriteriaTo();
     queueDetailSearchCriteriaToForEvent.setEventId(eventId);
-    Pageable eventPageable = PageRequest.of(0, 1000);
-    queueDetailSearchCriteriaToForEvent.setPageable(eventPageable);
+
     return queueDetailSearchCriteriaToForEvent;
   }
 
-  private QueueDetailEntity setEventQueueDetails(List<QueueDetailEto> eventqueuedetailEtosInQueue,
-      QueueDetailEntity queueDetailEntity) {
+  private QueueDetailEntity processQueueDetail(QueueDetailEntity queueDetailEntity,
+      List<QueueDetailEto> eventqueuedetailEtosInQueue) {
 
-    QueueDetailEto lastQueueDetail = eventqueuedetailEtosInQueue.get(eventqueuedetailEtosInQueue.size() - 1);
-    int lastQueueNumber = Integer.parseInt(lastQueueDetail.getQueueNumber().substring(1));
-    queueDetailEntity.setQueueNumber(generateQueueNumber(lastQueueNumber));
+    assignQueueNumber(eventqueuedetailEtosInQueue, queueDetailEntity);
+
+    int visitorCount = returnVisitorCount(queueDetailEntity.getEventId());
+
+    queueDetailEntity = setEventTimingInQueue(queueDetailEntity, visitorCount);
+
     return queueDetailEntity;
+  }
+
+  public void assignQueueNumber(List<QueueDetailEto> eventqueuedetailEtosInQueue, QueueDetailEntity queueDetailEntity) {
+
+    if (eventqueuedetailEtosInQueue.isEmpty()) {
+
+      queueDetailEntity.setQueueNumber("Q001");
+
+    } else {
+
+      queueDetailEntity.setQueueNumber(generateQueueNumber(eventqueuedetailEtosInQueue));
+
+    }
+  }
+
+  private int returnVisitorCount(long eventId) {
+
+    EventEto eventEto = this.eventmanagement.findEvent(eventId);
+    EventEntity eventEntity = getBeanMapper().map(eventEto, EventEntity.class);
+    int visitorCount = eventEntity.getVisitorCount();
+    return visitorCount;
   }
 
   private QueueDetailEntity setEventTimingInQueue(QueueDetailEntity queueDetailEntity, int visitor_Count) {
@@ -141,48 +158,26 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return queueDetailEntity;
   }
 
-  private QueueDetailEntity saveNewEventDetails(QueueDetailEntity queueDetailEntity) {
+  public String generateQueueNumber(List<QueueDetailEto> eventqueuedetailEtosInQueue) {
 
-    this.eventmanagement.increaseEventVisitorCount(queueDetailEntity.getEventId());
-    QueueDetailEntity resultEntity = getQueueDetailRepository().save(queueDetailEntity);
-    LOG.debug("QueueDetail with id '{}' has been created.", resultEntity.getId());
-    LOG.debug("The visitor count has been increased.");
-    return resultEntity;
-  }
+    QueueDetailEto lastQueueDetail = eventqueuedetailEtosInQueue.get(eventqueuedetailEtosInQueue.size() - 1);
+    int lastQueueNumber = Integer.parseInt(lastQueueDetail.getQueueNumber().substring(1));
 
-  /**
-   * Generates a new Queue Code using the Queue number of the last codeaccess created.
-   *
-   * @param lastQueueNumber the int of the last codeaccess created. Return type of function is string that is the new
-   *        Queue Number (example: 'Q005').
-   */
-  public String generateQueueNumber(int lastQueueNumber) {
+    int updatedQueueNumber = lastQueueNumber + 1;
 
-    int newQueueNumberDigit = lastQueueNumber + 1;
-    String newQueueCode = "";
-    if (newQueueNumberDigit == 1000) {
-      newQueueCode = "Q000";
-    } else {
-      StringBuilder stringBuilder = new StringBuilder();
-      stringBuilder.append(newQueueNumberDigit);
-      while (stringBuilder.length() < 3) {
-        stringBuilder.insert(0, "0");
-      }
-      stringBuilder.insert(0, "Q");
-      newQueueCode = stringBuilder.toString();
-    }
-    return newQueueCode;
+    String integerPart = String.valueOf(updatedQueueNumber);
+    String newQueueNumber = "Q00" + integerPart;
+    return newQueueNumber;
   }
 
   @Override
   public String getEstimatedTimeForVisitor(int visitorCount) {
 
-    String minEstimatedTime = "5 minutes";
-    int minTimePerQueue = Integer.parseInt(minEstimatedTime.substring(0, 1));
-    int lastVisitorIndex = visitorCount - 1;
-    int calculateEstimatedTime = minTimePerQueue * lastVisitorIndex;
-    String calculatedOutput = String.valueOf(calculateEstimatedTime) + "minutes";
+    String minAttentionTime = "5 minutes";
+    String calculatedOutput = "";
+    int minTimePerQueue = Integer.parseInt(minAttentionTime.substring(0, 1));
+    int calculateEstimatedTime = minTimePerQueue * visitorCount;
+    return calculatedOutput = String.valueOf(calculateEstimatedTime) + " minutes";
 
-    return calculatedOutput;
   }
 }

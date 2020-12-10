@@ -22,7 +22,7 @@ export class LoginService {
     pageable.pageSize = 10;
     pageable.sort=[]
     filters.username = username;
-    filters.pageable = pageable;
+  
     return this.http.post<Visitor>(`${this.baseUrl}` + '/visitormanagement/v1/visitor/search', filters)
    .pipe(
         map(visitors => visitors['content'][0]),

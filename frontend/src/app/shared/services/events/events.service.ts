@@ -17,9 +17,7 @@ export class EventsService {
   constructor(private http:HttpClient) { }
   
 
-  checkExistingUser(eventId,visitorId):Observable<any>{
-    return this.http.get<any>('${this.baseUrl}'+'/quedetailmanagement/v1/queuedetail/checkExistingUser/'+eventId+'/'+visitorId+'/');
-  }
+  
   
  getEvents():Observable<any>{
   
@@ -28,7 +26,7 @@ export class EventsService {
 }
 
 getTheQueueDetail(criteria:JoinCriteria):Observable<any>{
-  return this.http.post<any>('http://localhost:8081/jtqbackend/services/rest/queuedetailmanagement/v1/queuedetail/',criteria)
+  return this.http.post<any>(`${this.baseUrl}`+'/queuedetailmanagement/v1/queuedetail/',criteria)
 }
 
 }

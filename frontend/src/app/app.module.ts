@@ -9,10 +9,9 @@ import { EventsComponent } from './events/events.component';
 import {JoinqueueComponent} from './joinqueue/joinqueue.component'
 import { ShowqueueComponent } from './showqueue/showqueue.component';
 
-import { RouterModule } from '@angular/router';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CountdownModule } from 'ngx-countdown';
 
 
 
@@ -31,7 +30,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CountdownModule
   
   ],
   providers: [

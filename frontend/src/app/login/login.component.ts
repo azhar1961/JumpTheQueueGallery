@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../authentication/auth/auth.service';
 import { Visitor } from '../shared/models/interface';
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmit(loginformValue): void {
-    // Checks if given username and password are the ones aved in the database
+    // Checks if given username and password are the ones available in the database
     this.loginService.getVisitorByUsername(loginformValue.username).subscribe(
         (visitorFound) => {
           if(visitorFound==null){
@@ -55,24 +54,4 @@ export class LoginComponent implements OnInit {
       
         }
   }
-
-// loginSubmit(loginformValue){
-//   console.log(loginformValue.username);
-
-//  this.loginVisitor=JSON.parse(localStorage.getItem(loginformValue.username));
-//  console.log(this.loginVisitor)
- 
-//  if(this.loginVisitor!=null && ((loginformValue.username==this.loginVisitor.username)
-//     && (loginformValue.password==this.loginVisitor.password)))
-//     {
-//       console.log("Login Successfull");
-//       this.router.navigate(['/events']);
-//       this.authService.setLogged(true);
-//      // localStorage.setItem(this.authService.setLogged);
-//     }
-//   else{
-//      this.msg="Please check email id or password";
-    
-//     }
-// }
 

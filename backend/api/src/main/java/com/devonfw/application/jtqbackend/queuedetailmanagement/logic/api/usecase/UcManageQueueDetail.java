@@ -13,7 +13,7 @@ public interface UcManageQueueDetail {
    * @param queueDetailId Id of the queueDetail to delete
    * @return boolean <code>true</code> if the queueDetail can be deleted, <code>false</code> otherwise
    */
-  boolean deleteQueueDetail(long queueDetailId);
+  void deleteQueueDetail(long queueDetailId);
 
   /**
    * Saves a queueDetail and store it in the database.

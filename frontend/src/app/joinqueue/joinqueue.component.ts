@@ -14,11 +14,12 @@ export class JoinqueueComponent implements OnInit {
   currentlyAvailableQueue: string="Q123";
   constructor(private router:Router,private joinQueueService:JoinqueueService) { }
 
+ 
   queueDetail:any;
   criteria:JoinCriteria=new JoinCriteria();
   visitor:any;
   event:any;
-  eventName:any;
+
   ngOnInit(): void {
      this.event=JSON.parse(localStorage.getItem('currentEvent'));
      this.visitor=JSON.parse(localStorage.getItem('visitorLoggedIn')); 
@@ -30,7 +31,6 @@ export class JoinqueueComponent implements OnInit {
   }
 
   joinQueue(){
-
     this.criteria.eventId=this.event.id;
     this.criteria.visitorId=this.visitor.id;
     this.joinQueueService.joinQueue(this.criteria).subscribe(

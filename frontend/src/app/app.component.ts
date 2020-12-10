@@ -22,6 +22,7 @@ export class AppComponent {
   logout(){
     localStorage.removeItem('visitorLoggedIn');
     localStorage.removeItem('currentEvent');
+    localStorage.removeItem('events');
     this.router.navigate(["/login"]); 
   }
  

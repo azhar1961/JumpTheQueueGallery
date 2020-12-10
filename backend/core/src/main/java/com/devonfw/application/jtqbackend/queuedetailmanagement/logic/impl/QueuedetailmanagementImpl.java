@@ -44,9 +44,9 @@ public class QueuedetailmanagementImpl extends AbstractComponentFacade implement
   }
 
   @Override
-  public boolean deleteQueueDetail(long id) {
+  public void deleteQueueDetail(long id) {
 
-    return this.ucManageQueueDetail.deleteQueueDetail(id);
+    this.ucManageQueueDetail.deleteQueueDetail(id);
   }
 
   @Override

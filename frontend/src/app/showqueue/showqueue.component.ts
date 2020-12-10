@@ -9,18 +9,19 @@ import { ShowqueueService } from '../shared/services/showqueue/showqueue.service
 })
 export class ShowqueueComponent implements OnInit {
    yourqueueNumber: any;
-   currentlyAttendedQueueNumber="Q000";
-   minEstimatedtime:any;
+   currentlyAttendedQueueNumber="Q001";
+   minEstimatedTime:number;
+
   constructor(private router:Router,private showQueueService:ShowqueueService) { }
 
 event:any;
 queueDetail:any;
-token:any;
-eventName:any;
 
   ngOnInit(): void {
     this.queueDetail=JSON.parse(localStorage.getItem('currentQueueDetail'));
     this.event=JSON.parse(localStorage.getItem('currentEvent'));
+    this.minEstimatedTime=parseInt(this.queueDetail.minEstimatedTime)*60;
+    //console.log(this.minEstimatedTime);
     }
 
     goBackToEvents(){
