@@ -2,7 +2,10 @@ package com.devonfw.application.jtqbackend.visitormanagement.dataaccess.api;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import com.devonfw.application.jtqbackend.general.common.api.validation.EmailExtended;
+import com.devonfw.application.jtqbackend.general.common.api.validation.Phone;
 import com.devonfw.application.jtqbackend.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.devonfw.application.jtqbackend.visitormanagement.common.api.Visitor;
 
@@ -13,18 +16,27 @@ import com.devonfw.application.jtqbackend.visitormanagement.common.api.Visitor;
 @Table(name = "Visitor")
 public class VisitorEntity extends ApplicationPersistenceEntity implements Visitor {
 
+  @NotNull
+  @EmailExtended
   private String username;
 
+  @NotNull
   private String name;
 
+  @NotNull
+  @Phone
   private String phoneNumber;
 
+  @NotNull
   private String password;
 
+  @NotNull
   private Boolean acceptedCommercial;
 
+  @NotNull
   private Boolean acceptedTerms;
 
+  @NotNull
   private Boolean userType;
 
   private static final long serialVersionUID = 1L;

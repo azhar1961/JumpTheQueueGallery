@@ -1,7 +1,9 @@
-import { Route } from '@angular/compiler/src/core';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JoinCriteria } from '../shared/models/interface';
+
+import { JoinCriteria, Event } from '../shared/models/interface';
+import { IsJoinedQueueService } from '../shared/services/isJoinedQueue/is-joined-queue.service';
 import { JoinqueueService } from '../shared/services/joinqueue/joinqueue.service';
 
 
@@ -12,15 +14,19 @@ import { JoinqueueService } from '../shared/services/joinqueue/joinqueue.service
 })
 export class JoinqueueComponent implements OnInit {
   currentlyAvailableQueue: string="Q123";
-  constructor(private router:Router,private joinQueueService:JoinqueueService) { }
+  constructor(private router:Router,private joinQueueService:JoinqueueService,private isjoinedQueueService:IsJoinedQueueService) { }
 
  
   queueDetail:any;
   criteria:JoinCriteria=new JoinCriteria();
   visitor:any;
-  event:any;
+  event:Event=new Event();
+  //eventJoined:Event=new Event();
 
   ngOnInit(): void {
+    // if(this.isjoinedQueueService.isJoined){
+    //   this.router.navigate(['/showqueue']);
+    // }
      this.event=JSON.parse(localStorage.getItem('currentEvent'));
      this.visitor=JSON.parse(localStorage.getItem('visitorLoggedIn')); 
   }

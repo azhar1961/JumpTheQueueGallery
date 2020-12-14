@@ -37,9 +37,8 @@ export class Role {
 }
 
 export class FilterQueueDetail {
-pageable: Pageable;
 visitorId?: Number;
-eventId?: string;
+eventId?: Number;
 }
 
 export class JoinCriteria {
