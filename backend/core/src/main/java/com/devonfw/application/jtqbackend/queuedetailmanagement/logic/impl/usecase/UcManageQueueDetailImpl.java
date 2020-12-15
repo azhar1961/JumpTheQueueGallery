@@ -79,6 +79,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     }
   }
 
+  /**
+   * fetches the list of Queue Details with the specified criteria.
+   *
+   * @param QueueDetailEntity. Return type of function is List of QueueDetailEto.
+   */
   private List<QueueDetailEto> getListOfQueueDetailEto(QueueDetailEntity queueDetailEntity) {
 
     QueueDetailSearchCriteriaTo searchCriteriaForQueueDetail = setSearchCriteria(queueDetailEntity);
@@ -88,6 +93,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return queuedetailEtosInQueue;
   }
 
+  /**
+   * sets the search criteria for queue detail with eventid and visitor id.
+   *
+   * @param QueueDetailEntity. Return type search criteria object.
+   */
   private QueueDetailSearchCriteriaTo setSearchCriteria(QueueDetailEntity queueDetailEntity) {
 
     QueueDetailSearchCriteriaTo queueDetailSearchCriteriaTo = new QueueDetailSearchCriteriaTo();
@@ -98,6 +108,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
 
   }
 
+  /**
+   * fetches the list of Queue Details with the specified criteria.
+   *
+   * @param QueueDetailEntity. Return type of function is List of QueueDetailEto.
+   */
   private List<QueueDetailEto> getEventQueueDetailEtoList(QueueDetailEntity queueDetailEntity) {
 
     QueueDetailSearchCriteriaTo searchCriteriaForEvent = setSearchCriteriaForEvent(queueDetailEntity.getEventId());
@@ -107,6 +122,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return eventqueuedetailEtosInQueue;
   }
 
+  /**
+   * sets the search criteria for queue detail with eventid.
+   *
+   * @param QueueDetailEntity. Return type search criteria object.
+   */
   private QueueDetailSearchCriteriaTo setSearchCriteriaForEvent(long eventId) {
 
     QueueDetailSearchCriteriaTo queueDetailSearchCriteriaToForEvent = new QueueDetailSearchCriteriaTo();
@@ -115,6 +135,12 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return queueDetailSearchCriteriaToForEvent;
   }
 
+  /**
+   * Process and assign all the different field values to the QueueDetail.
+   *
+   * @param QueueDetailEntity and QueueDetailEto. Return type QueueDetailEntity.
+   */
+
   private QueueDetailEntity processQueueDetail(QueueDetailEntity queueDetailEntity,
       List<QueueDetailEto> eventqueuedetailEtosInQueue) {
 
@@ -122,10 +148,16 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
 
     int visitorCount = returnVisitorCount(queueDetailEntity.getEventId());
 
-    queueDetailEntity = setEventTimingInQueue(queueDetailEntity, visitorCount);
+    queueDetailEntity = setTimingsInQueue(queueDetailEntity, visitorCount);
 
     return queueDetailEntity;
   }
+
+  /**
+   * Assign Queue Number to the QueueDetail.
+   *
+   * @param QueueDetailEntity and QueueDetailEto. Return type void.
+   */
 
   public void assignQueueNumber(List<QueueDetailEto> eventqueuedetailEtosInQueue, QueueDetailEntity queueDetailEntity) {
 
@@ -140,6 +172,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     }
   }
 
+  /**
+   * to get the visitor count inside the particular event.
+   *
+   * @param Event Id. Return type int.
+   */
   private int returnVisitorCount(long eventId) {
 
     EventEto eventEto = this.eventmanagement.findEvent(eventId);
@@ -148,7 +185,12 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return visitorCount;
   }
 
-  private QueueDetailEntity setEventTimingInQueue(QueueDetailEntity queueDetailEntity, int visitor_Count) {
+  /**
+   * sets the timings in queue Detail.
+   *
+   * @param QueueDetailEntity, visitor_count. Return type QueueDetailEntity.
+   */
+  private QueueDetailEntity setTimingsInQueue(QueueDetailEntity queueDetailEntity, int visitor_Count) {
 
     queueDetailEntity.setCreationTime(Timestamp.from(Instant.now()));
     queueDetailEntity.setStartTime(Timestamp.from(Instant.now()));
@@ -158,6 +200,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return queueDetailEntity;
   }
 
+  /**
+   * generates the queue Number for the particular Queue.
+   *
+   * @param List of QueueDetailEto.Return type new queue number in string format.
+   */
   public String generateQueueNumber(List<QueueDetailEto> eventqueuedetailEtosInQueue) {
 
     QueueDetailEto lastQueueDetail = eventqueuedetailEtosInQueue.get(eventqueuedetailEtosInQueue.size() - 1);
@@ -170,6 +217,11 @@ public class UcManageQueueDetailImpl extends AbstractQueueDetailUc implements Uc
     return newQueueNumber;
   }
 
+  /**
+   * generates the estimated time for the particular visitor's turn to come.
+   *
+   * @param visitor count.Return estimated time in string format.
+   */
   @Override
   public String getEstimatedTimeForVisitor(int visitorCount) {
 
