@@ -1,0 +1,16 @@
+<div class="row pt-5">
+<div class="card text-center mx-auto border-secondary" style="width: 20rem;">
+    <div class="card-body">
+        <h2>{{event.eventName}}</h2><br><br>
+      <p class="card-title text-center">Your Position in Queue is:</p><h2 class="text-info">{{queueDetail.queueNumber}}</h2>
+     
+      <p>Estimated remaining time for your turn is: <b class="text-info"> <h3><countdown [config]="{leftTime:minEstimatedTime}" ></countdown></h3></b></p>
+      <p>Currently attended Queue position number is:</p><h2 class="text-center text-info">{{currentlyAttendedQueueNumber}}</h2><br>
+      <button (click)="leaveQueue()" type="submit" class="btn btn-danger text-center">LEAVE THE QUEUE</button>
+    </div>
+</div>
+</div><br>
+<a class="text-secondary" align="center" (click)="goBackToEvents()" ><h6>Go Back to Events</h6></a>
+
+
+
