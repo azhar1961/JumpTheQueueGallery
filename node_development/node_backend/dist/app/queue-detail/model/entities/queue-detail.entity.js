@@ -20,7 +20,7 @@ const event_entity_1 = require("../../../event/model/entities/event.entity");
 const base_entity_entity_1 = require("../../../shared/model/entities/base-entity.entity");
 let QueueDetail = class QueueDetail extends base_entity_entity_1.BaseEntity {
     static _OPENAPI_METADATA_FACTORY() {
-        return { queueNumber: { required: false, type: () => String, maxLength: 255 }, minEstimatedTime: { required: false, type: () => String, maxLength: 255 }, creationTime: { required: false, type: () => String, maxLength: 255 }, user: { required: false, type: () => require("../../../core/user/model/entities/user.entity").User }, event: { required: false, type: () => require("../../../event/model/entities/event.entity").Event } };
+        return { queueNumber: { required: false, type: () => String, maxLength: 255 }, minEstimatedTime: { required: false, type: () => String, maxLength: 255 }, idUser: { required: false, type: () => Number }, idEvent: { required: false, type: () => Number } };
     }
 };
 __decorate([
@@ -43,24 +43,18 @@ __decorate([
     swagger_1.ApiPropertyOptional(),
     class_validator_1.IsDefined({ groups: [crud_1.CrudValidationGroups.CREATE] }),
     class_validator_1.IsOptional({ groups: [crud_1.CrudValidationGroups.UPDATE] }),
-    class_validator_1.MaxLength(255),
-    typeorm_1.Column('varchar', { length: 255, nullable: true }),
-    __metadata("design:type", String)
-], QueueDetail.prototype, "creationTime", void 0);
+    typeorm_1.ManyToOne(() => user_entity_1.User, { eager: true }),
+    typeorm_1.JoinColumn({ name: 'idUser', referencedColumnName: 'id' }),
+    __metadata("design:type", Number)
+], QueueDetail.prototype, "idUser", void 0);
 __decorate([
     swagger_1.ApiPropertyOptional(),
     class_validator_1.IsDefined({ groups: [crud_1.CrudValidationGroups.CREATE] }),
     class_validator_1.IsOptional({ groups: [crud_1.CrudValidationGroups.UPDATE] }),
-    typeorm_1.ManyToOne(() => user_entity_1.User, User => User.id),
-    __metadata("design:type", user_entity_1.User)
-], QueueDetail.prototype, "user", void 0);
-__decorate([
-    swagger_1.ApiPropertyOptional(),
-    class_validator_1.IsDefined({ groups: [crud_1.CrudValidationGroups.CREATE] }),
-    class_validator_1.IsOptional({ groups: [crud_1.CrudValidationGroups.UPDATE] }),
-    typeorm_1.ManyToOne(() => event_entity_1.Event, Event => Event.id),
-    __metadata("design:type", event_entity_1.Event)
-], QueueDetail.prototype, "event", void 0);
+    typeorm_1.ManyToOne(() => event_entity_1.Event, { eager: true }),
+    typeorm_1.JoinColumn({ name: 'idEvent', referencedColumnName: 'id' }),
+    __metadata("design:type", Number)
+], QueueDetail.prototype, "idEvent", void 0);
 QueueDetail = __decorate([
     typeorm_1.Entity()
 ], QueueDetail);

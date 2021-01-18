@@ -26,8 +26,8 @@ export class AuthController {
   }
 
   @Get('users')
-  getUsers() {
-    return this.authService.getUsers();
+  async getUsers(): Promise<[User[], number]> {
+    return await this.authService.getUsers();
   }
 
   @Get('currentuser')

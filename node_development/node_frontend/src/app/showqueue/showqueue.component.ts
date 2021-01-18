@@ -14,6 +14,7 @@ export class ShowqueueComponent implements OnInit {
    event:any;
    queueDetail:any;
    asyncResult:any;
+   
 
   constructor(private router:Router,private showQueueService:ShowqueueService) { }
 
@@ -31,18 +32,15 @@ export class ShowqueueComponent implements OnInit {
     }
 
    async leaveQueue(){
+     console.log("inside Leave Queue");
+     console.log(this.queueDetail.id);
      this.asyncResult=await this.showQueueService.deleteQueue(this.queueDetail.id).toPromise();
+     console.log("after deleting queue detail of  "+this.queueDetail.id);
      this.router.navigate(['/events']);
      localStorage.removeItem('currentQueueDetail');
      localStorage.removeItem('currentEvent');
-      //  this.showQueueService.deleteQueue(this.queueDetail.id).subscribe(
-      //   //  data=>{
-      //   //    this.router.navigate(['/events']);
-      //   //    localStorage.removeItem('currentQueueDetail');
-      //   //    localStorage.removeItem('currentEvent');
-      //   //  }
-
-      //  )
+     let visitor=JSON.parse(localStorage.getItem('LoggedInUser'));
+     localStorage.removeItem('queueDetail_'+this.event.id+'_'+visitor.id);
     }
 
 }

@@ -18,7 +18,7 @@ const typeorm_1 = require("typeorm");
 const base_entity_entity_1 = require("../../../shared/model/entities/base-entity.entity");
 let Event = class Event extends base_entity_entity_1.BaseEntity {
     static _OPENAPI_METADATA_FACTORY() {
-        return { eventName: { required: false, type: () => String, maxLength: 255 }, startDate: { required: false, type: () => String, maxLength: 255 }, endDate: { required: false, type: () => String, maxLength: 255 }, location: { required: false, type: () => String, maxLength: 255 }, description: { required: false, type: () => String, maxLength: 255 }, attentionTime: { required: false, type: () => String, maxLength: 255 }, visitorCount: { required: false, type: () => Object } };
+        return { eventName: { required: true, type: () => String, maxLength: 255 }, startDate: { required: true, type: () => String, maxLength: 255 }, endDate: { required: true, type: () => String, maxLength: 255 }, location: { required: true, type: () => String, maxLength: 255 }, description: { required: true, type: () => String, maxLength: 255 }, attentionTime: { required: true, type: () => String, maxLength: 255 }, visitorCount: { required: true, type: () => Number } };
     }
 };
 __decorate([
@@ -73,7 +73,7 @@ __decorate([
     swagger_1.ApiPropertyOptional(),
     class_validator_1.IsDefined({ groups: [crud_1.CrudValidationGroups.CREATE] }),
     class_validator_1.IsOptional({ groups: [crud_1.CrudValidationGroups.UPDATE] }),
-    typeorm_1.Column('int'),
+    typeorm_1.Column('int', { default: 0, nullable: false }),
     __metadata("design:type", Number)
 ], Event.prototype, "visitorCount", void 0);
 Event = __decorate([

@@ -3757,7 +3757,7 @@
         "affectsGlobalScope": false
       },
       "../src/app/core/user/services/user.service.ts": {
-        "version": "5d7246cf4c4a152da43b0676ff15eee2e3922b395ea45fe8af88a90095db82e8",
+        "version": "6da1c336065b8b8f92d1103d6036e92404892c4ab603afe5d6085b44f528b3fb",
         "signature": "3208b4180e4400296a7cdae5c279c7b10ef6f54e814aee2270d0d8811c132d4a",
         "affectsGlobalScope": false
       },
@@ -3777,7 +3777,7 @@
         "affectsGlobalScope": false
       },
       "../src/app/core/auth/controllers/auth.controller.ts": {
-        "version": "36835e5632989e6a8d43c32bed0cd6c4e1155f952ba7ffd2df3c9ef176b519c5",
+        "version": "bd3b49fb81f888b15c2eb65c19d0dd7318357deed6040ac118d5cf91ba09b67d",
         "signature": "4e976a5920633143692849575bac3bbe99000d8a453507578e2b0d15f29df61a",
         "affectsGlobalScope": false
       },
@@ -3812,8 +3812,8 @@
         "affectsGlobalScope": false
       },
       "../src/app/event/model/entities/event.entity.ts": {
-        "version": "b540d8cab1a0e71ce0a8003d93cb85f38f99792c625a214c4c3e602b9ba54795",
-        "signature": "1dfabe8c4226de9e3bd91357edf426d6061ee17f79af4a0df534ad1da00938bb",
+        "version": "dcbe4bc5bcdffe3b19e5d10641e170d947d8d6815036af020f19f5facb1f57af",
+        "signature": "7060986174c73266fba91a88ea0de1858e66c5f60d23fbe8609bdabf0aaaf65b",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjsx/crud-typeorm/lib/typeorm-crud.service.d.ts": {
@@ -3827,8 +3827,8 @@
         "affectsGlobalScope": false
       },
       "../src/app/event/services/event.crud.service.ts": {
-        "version": "9fbe2db806d1cfc621458a6736a74e4e1369c9d3799b7adbaf8b9947f645f493",
-        "signature": "64893b5c493a94b469ebcda1a8dd4eea95161e9621936587a4b8372e7eff8881",
+        "version": "6d936ba878a9acea92c35acf38b91b0202b4c2a49ee5b18a1ae0ce89303ba36f",
+        "signature": "029e85daab64b9bd56d0c5a00d090b5be0850c33f490d202352991d81649163b",
         "affectsGlobalScope": false
       },
       "../src/app/event/controllers/event.crud.controller.ts": {
@@ -3842,22 +3842,27 @@
         "affectsGlobalScope": false
       },
       "../src/app/queue-detail/model/entities/queue-detail.entity.ts": {
-        "version": "51963efa0f75e00be77846365f446e29dd09890935d2eb5fde40f6fb6bc4cf1e",
-        "signature": "6c8da548cb90235d285fed3e2434f7d2fa7b4ed0d2b7defb93492e049cf51aa1",
+        "version": "149501711eece446b5f16459cc923bf2cc5cbc645a9027377e1b5660a27e8548",
+        "signature": "2628c4a71a55eeee625ef9eb84997caab0bd88c0b86dc69884974de259e6290f",
+        "affectsGlobalScope": false
+      },
+      "../src/app/queue-detail/model/entities/queuedetail.dto.ts": {
+        "version": "e26df79c4a1afc1efa1264a1f6fca243b682f3f27f20a3c7b096ef20ea0be6f5",
+        "signature": "9e51d46ca92e79fcc008943a18affd122f510deb84c69048916f5109c53fc6cf",
         "affectsGlobalScope": false
       },
       "../src/app/queue-detail/services/queue-detail.crud.service.ts": {
-        "version": "f68ab43099be219334b29a91dd504d39d79c950f6738973905077afe916fd6d9",
-        "signature": "9e7bdbf6b1c5f537e6c11c1ab3fae03bf93d6890e195798256cbd3cd712521e2",
+        "version": "a611da6cb32adcd9048f20e66046d23b2100d061f570c3ddc321f8eb73af98c0",
+        "signature": "318a7c88aeb05baff979cf3223bf863562da720638a7081757bb87edbe42df70",
         "affectsGlobalScope": false
       },
       "../src/app/queue-detail/controllers/queue-detail.crud.controller.ts": {
-        "version": "2a64c6baf1be84934794a81aace91c9230b1f5d597bfd051cd515e9d129ea6e1",
-        "signature": "2b23ae2b4056ac7f7079593b9579e4ac8a506f297da38d6e3f3a79bc21c5c7b1",
+        "version": "bfc92f0e61766e327326af968d711d23788b36d282060a6740ed2aff0468df6a",
+        "signature": "e161c981d9f079af0be65aebf152ac6fc720811cb0a80fbef26c4275a88406a8",
         "affectsGlobalScope": false
       },
       "../src/app/queue-detail/queue-detail.module.ts": {
-        "version": "a94bf6b3f33bbe1ea1630ad922f4a58220e8e2f8d6c5e9457c1fe2de3b518422",
+        "version": "b60b50a9fd60ed91ed1d5a7dc647277d5ed698506c12fb0f87c8512702ce777f",
         "signature": "281ca4ca2bdc4564ffcbd5a9642e316d52a86cf79933e446682a01eb86357d22",
         "affectsGlobalScope": false
       },
@@ -3896,16 +3901,6 @@
         "signature": "fb8a8f8a082ec095b16788e4d2eb039f6078380a89fdb158a68d33c74f9c3c7f",
         "affectsGlobalScope": false
       },
-      "../src/app/queue-detail/model/joincriteria.ts": {
-        "version": "74c7dec7df9b328efd67941fc303b255e7db8b31b80471150435856f3600c409",
-        "signature": "8a26d6f3110651ba7e8cf5c962bfefcff9f83d78fafd8b2871c499cdd2b17c38",
-        "affectsGlobalScope": false
-      },
-      "../src/app/queue-detail/model/entities/queuedetail.dto.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "affectsGlobalScope": false
-      },
       "../src/config/default.ts": {
         "version": "2e71bb50f4eb49a7ddb4da97740e43c159e2f03d37223272b95d2611c655d991",
         "signature": "9a89121652e610dc5f21c9c27cd1902469548284f10e65714910bf436ca38cb9",
@@ -3932,12 +3927,12 @@
         "affectsGlobalScope": false
       },
       "../src/migration/1609823263069-createtables.ts": {
-        "version": "de793284aebd0fec7e0f783808c49d490bbd214c015c2d2bbc30928a7eafeb14",
+        "version": "9c150a3e82dee5f28f3a180a70eacb25ba7ed2af64982d4d8db2cdaeba70370b",
         "signature": "070fe35ee6304a72fe253f3c69e22abe534b468f03c51c22701f9adeff0d4981",
         "affectsGlobalScope": false
       },
       "../src/migration/1609823284132-insertdata.ts": {
-        "version": "8d5ce9943c89491b77dd7151a38fa1b06b603f4faf2920a41ab9ec01332faccf",
+        "version": "8cd7ffe60b0b8c9cd802b5c9c9bfea37622566ac035dfc1616e9baf028456a0a",
         "signature": "12d7bd22e0738d1e59e147f80358172ab84844b8e824c4715eda9c59f919f83d",
         "affectsGlobalScope": false
       },
@@ -7505,6 +7500,7 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjsx/crud/lib/index.d.ts",
         "../src/app/queue-detail/model/entities/queue-detail.entity.ts",
+        "../src/app/queue-detail/model/entities/queuedetail.dto.ts",
         "../src/app/queue-detail/services/queue-detail.crud.service.ts"
       ],
       "../src/app/queue-detail/model/entities/queue-detail.entity.ts": [
@@ -7519,6 +7515,9 @@
       "../src/app/queue-detail/queue-detail.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/app/core/user/model/entities/user.entity.ts",
+        "../src/app/event/model/entities/event.entity.ts",
+        "../src/app/event/services/event.crud.service.ts",
         "../src/app/queue-detail/controllers/queue-detail.crud.controller.ts",
         "../src/app/queue-detail/model/entities/queue-detail.entity.ts",
         "../src/app/queue-detail/services/queue-detail.crud.service.ts"
@@ -7526,9 +7525,12 @@
       "../src/app/queue-detail/services/queue-detail.crud.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
-        "../node_modules/@nestjsx/crud-typeorm/lib/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
-        "../src/app/queue-detail/model/entities/queue-detail.entity.ts"
+        "../src/app/core/user/model/entities/user.entity.ts",
+        "../src/app/event/model/entities/event.entity.ts",
+        "../src/app/event/services/event.crud.service.ts",
+        "../src/app/queue-detail/model/entities/queue-detail.entity.ts",
+        "../src/app/queue-detail/model/entities/queuedetail.dto.ts"
       ],
       "../src/app/shared/filters/business-logic.filter.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -10712,17 +10714,19 @@
       ],
       "../src/app/queue-detail/controllers/queue-detail.crud.controller.ts": [
         "../src/app/queue-detail/model/entities/queue-detail.entity.ts",
+        "../src/app/queue-detail/model/entities/queuedetail.dto.ts",
         "../src/app/queue-detail/services/queue-detail.crud.service.ts"
       ],
       "../src/app/queue-detail/model/entities/queue-detail.entity.ts": [
-        "../src/app/core/user/model/entities/user.entity.ts",
-        "../src/app/event/model/entities/event.entity.ts",
         "../src/app/shared/model/entities/base-entity.entity.ts"
       ],
       "../src/app/queue-detail/services/queue-detail.crud.service.ts": [
-        "../node_modules/@nestjsx/crud-typeorm/lib/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
-        "../src/app/queue-detail/model/entities/queue-detail.entity.ts"
+        "../src/app/core/user/model/entities/user.entity.ts",
+        "../src/app/event/model/entities/event.entity.ts",
+        "../src/app/event/services/event.crud.service.ts",
+        "../src/app/queue-detail/model/entities/queue-detail.entity.ts",
+        "../src/app/queue-detail/model/entities/queuedetail.dto.ts"
       ],
       "../src/app/shared/filters/business-logic.filter.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -11601,7 +11605,6 @@
       "../src/app/queue-detail/controllers/queue-detail.crud.controller.ts",
       "../src/app/queue-detail/model/entities/queue-detail.entity.ts",
       "../src/app/queue-detail/model/entities/queuedetail.dto.ts",
-      "../src/app/queue-detail/model/joincriteria.ts",
       "../src/app/queue-detail/queue-detail.module.ts",
       "../src/app/queue-detail/services/queue-detail.crud.service.ts",
       "../src/app/shared/exceptions/business-logic.exception.ts",

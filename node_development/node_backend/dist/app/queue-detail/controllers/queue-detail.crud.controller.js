@@ -19,22 +19,46 @@ const crud_1 = require("@nestjsx/crud");
 const serializer_1 = require("@devon4node/common/serializer");
 const queue_detail_entity_1 = require("../model/entities/queue-detail.entity");
 const queue_detail_crud_service_1 = require("../services/queue-detail.crud.service");
+const queueDetail_dto_1 = require("../model/entities/queueDetail.dto");
 let QueueDetailCrudController = class QueueDetailCrudController {
     constructor(queueDetailservice) {
         this.queueDetailservice = queueDetailservice;
     }
-    async saveQueueDetail(queueDetail) {
-        console.log(queueDetail);
+    async joinQueue(queueDTO) {
+        console.log(queueDTO);
+        return await this.queueDetailservice.joinQueue(queueDTO);
+    }
+    async leaveQueue(queueId) {
+        console.log(queueId + " before deleting it");
+        return await this.queueDetailservice.leaveQueue(queueId);
+    }
+    async getQueueDetails() {
+        return await this.queueDetailservice.getQueueDetails();
     }
 };
 __decorate([
-    common_1.Post('saveQueueDetail'),
-    openapi.ApiResponse({ status: 201 }),
+    common_1.Post('joinQueue'),
+    openapi.ApiResponse({ status: 201, type: require("../model/entities/queue-detail.entity").QueueDetail }),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [queue_detail_entity_1.QueueDetail]),
+    __metadata("design:paramtypes", [queueDetail_dto_1.queueDetailDTO]),
     __metadata("design:returntype", Promise)
-], QueueDetailCrudController.prototype, "saveQueueDetail", null);
+], QueueDetailCrudController.prototype, "joinQueue", null);
+__decorate([
+    common_1.Delete(':id'),
+    openapi.ApiResponse({ status: 200, type: require("../model/entities/queue-detail.entity").QueueDetail }),
+    __param(0, common_1.Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], QueueDetailCrudController.prototype, "leaveQueue", null);
+__decorate([
+    common_1.Get('getAllQueueDetails'),
+    openapi.ApiResponse({ status: 200, type: [require("../model/entities/queue-detail.entity").QueueDetail] }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], QueueDetailCrudController.prototype, "getQueueDetails", null);
 QueueDetailCrudController = __decorate([
     crud_1.Crud({
         model: {

@@ -12,47 +12,49 @@ export class Event extends BaseEntity {
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
     @MaxLength(255)
     @Column('varchar', { length: 255, nullable: false })
-    eventName?: string;
+    eventName!: string;
 
     @ApiPropertyOptional()
     @IsDefined({ groups: [CrudValidationGroups.CREATE] })
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
     @MaxLength(255)
     @Column('varchar', { nullable: true })
-    startDate?: string;
+    startDate!: string;
 
     @ApiPropertyOptional()
     @IsDefined({ groups: [CrudValidationGroups.CREATE] })
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
     @MaxLength(255)
     @Column('varchar', { nullable: true })
-    endDate?: string;
+    endDate!: string;
 
     @ApiPropertyOptional()
     @IsDefined({ groups: [CrudValidationGroups.CREATE] })
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
     @MaxLength(255)
     @Column('varchar', { length: 255, nullable: false })
-    location?: string;
+    location!: string;
 
     @ApiPropertyOptional()
     @IsDefined({ groups: [CrudValidationGroups.CREATE] })
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
     @MaxLength(255)
     @Column('varchar', { length: 255, nullable: false })
-    description?: string;
+    description!: string;
 
     @ApiPropertyOptional()
     @IsDefined({ groups: [CrudValidationGroups.CREATE] })
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
     @MaxLength(255)
     @Column('varchar', { nullable: false })
-    attentionTime?: string;
+    attentionTime!: string;
 
     @ApiPropertyOptional()
     @IsDefined({ groups: [CrudValidationGroups.CREATE] })
     @IsOptional({ groups: [CrudValidationGroups.UPDATE] })
-    @Column('int')
-    visitorCount?: Number;
+    @Column('int', { default: 0, nullable: false })
+    visitorCount!: number;
+
+
 
 }

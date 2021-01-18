@@ -35,8 +35,8 @@ let AuthController = class AuthController {
             throw new common_1.BadRequestException(e.message);
         }
     }
-    getUsers() {
-        return this.authService.getUsers();
+    async getUsers() {
+        return await this.authService.getUsers();
     }
     currentUser(user) {
         return user;
@@ -64,7 +64,7 @@ __decorate([
     openapi.ApiResponse({ status: 200 }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], AuthController.prototype, "getUsers", null);
 __decorate([
     common_1.Get('currentuser'),

@@ -12,12 +12,15 @@ const queue_detail_entity_1 = require("./model/entities/queue-detail.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const queue_detail_crud_service_1 = require("./services/queue-detail.crud.service");
 const queue_detail_crud_controller_1 = require("./controllers/queue-detail.crud.controller");
+const event_entity_1 = require("../event/model/entities/event.entity");
+const user_entity_1 = require("../core/user/model/entities/user.entity");
+const event_crud_service_1 = require("../event/services/event.crud.service");
 let QueueDetailModule = class QueueDetailModule {
 };
 QueueDetailModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forFeature([queue_detail_entity_1.QueueDetail])],
-        providers: [queue_detail_crud_service_1.QueueDetailCrudService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([queue_detail_entity_1.QueueDetail, event_entity_1.Event, user_entity_1.User])],
+        providers: [queue_detail_crud_service_1.QueueDetailCrudService, event_crud_service_1.EventCrudService],
         controllers: [queue_detail_crud_controller_1.QueueDetailCrudController],
     })
 ], QueueDetailModule);

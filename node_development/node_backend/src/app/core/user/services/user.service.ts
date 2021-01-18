@@ -46,6 +46,6 @@ export class UserService {
 
 
   async getUsers(): Promise<[User[], number]> {
-    return this.userRepository.findAndCount();
+    return await this.userRepository.findAndCount();
   }
 }

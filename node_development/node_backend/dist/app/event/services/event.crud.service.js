@@ -22,6 +22,12 @@ let EventCrudService = class EventCrudService extends crud_typeorm_1.TypeOrmCrud
     constructor(repo) {
         super(repo);
     }
+    async increaseVisitorCount(eventId) {
+        console.log(eventId);
+    }
+    async decreaseVisitorCount(eventId) {
+        console.log(eventId);
+    }
 };
 EventCrudService = __decorate([
     common_1.Injectable(),

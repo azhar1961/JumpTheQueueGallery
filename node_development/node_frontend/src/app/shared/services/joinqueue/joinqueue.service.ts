@@ -15,6 +15,6 @@ export class JoinqueueService {
   constructor(private http:HttpClient) { }
 
   joinQueue(criteria:JoinCriteria):Observable<any>{
-    return this.http.post<any>(`${this.baseUrl}`+'/queue-detail/queue-details/saveQueueDetail',criteria)
+    return this.http.post<any>(`${this.baseUrl}`+'/queue-detail/queue-details/joinQueue',criteria)
   }
 }

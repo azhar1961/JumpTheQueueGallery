@@ -22,7 +22,7 @@ export class JoinqueueComponent implements OnInit {
   visitor:Visitor=new Visitor();
   event:Event=new Event();
   asyncResult:any;
-  
+  currentlyJoinedEvent:any;
 
   ngOnInit(): void {
     
@@ -44,7 +44,9 @@ export class JoinqueueComponent implements OnInit {
     console.log(this.criteria);
     this.asyncResult=<QueueDetail>await this.joinQueueService.joinQueue(this.criteria).toPromise();
     this.queueDetail=this.asyncResult;
+    this.currentlyJoinedEvent=this.event.id+"_"+this.visitor.id;
     localStorage.setItem('currentQueueDetail',JSON.stringify(this.queueDetail));
+    localStorage.setItem('queueDetail_'+(this.currentlyJoinedEvent),this.currentlyJoinedEvent);
     this.router.navigate(['/showqueue']);
    
   }

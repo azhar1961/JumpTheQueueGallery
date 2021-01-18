@@ -13,7 +13,8 @@ export class ShowqueueService {
 
 
   deleteQueue(queueDetailId:number):Observable<any>{
-  return this.http.delete<any>(`${this.baseUrl}`+queueDetailId);
+    console.log("inside deleteQueue service "+queueDetailId);
+  return this.http.delete<any>(`${this.baseUrl}`+'/queue-detail/queue-details/'+queueDetailId);
   
   }
 }

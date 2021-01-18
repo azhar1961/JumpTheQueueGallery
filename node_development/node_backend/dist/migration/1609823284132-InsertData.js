@@ -48,16 +48,16 @@ class InsertData1609823284132 {
             1,
             roles_enum_1.roles.ADMIN,
         ]);
-        await queryRunner.query(`INSERT INTO EVENT(id,eventName,startDate,endDate, location, description,attentionTime,visitorCount) VALUES (1,'Rebecca','27-12-2020',null,'kolkata','Cultural Event','5 minutes',0);`);
-        await queryRunner.query(`INSERT INTO EVENT(id,eventName,startDate,endDate, location, description,attentionTime,visitorCount) VALUES (2,'Reflexobeta','28-12-2020',null,'Bangalore','Dancing Event','5 minutes',0);`);
-        await queryRunner.query(`INSERT INTO EVENT(id,eventName,startDate,endDate, location, description,attentionTime,visitorCount) VALUES (3,'Orkotan','29-12-2020',null,'Mumbai','Musical Event','5 minutes',0);`);
-        await queryRunner.query(`INSERT INTO QUEUE_DETAIL(id,queueNumber,minEstimatedTime,creationTime,userId, eventId) VALUES (1,'Q001','10 minutes',datetime('now'),3,1);`);
+        await queryRunner.query(`INSERT INTO EVENT(id,eventName,startDate,endDate, location, description,attentionTime,
+        visitorCount) VALUES (1,'Rebecca','27-12-2020',null,'kolkata','Cultural Event','5 minutes',0);`);
+        await queryRunner.query(`INSERT INTO EVENT(id,eventName,startDate,endDate, location, description,attentionTime,
+        visitorCount) 
+        VALUES (2,'Reflexobeta','28-12-2020',null,'Bangalore','Dancing Event','5 minutes',0);`);
+        await queryRunner.query(`INSERT INTO EVENT(id,eventName,startDate,endDate, location, description,attentionTime,
+        visitorCount) VALUES (3,'Orkotan','29-12-2020',null,'Mumbai','Musical Event','5 minutes',0);`);
     }
     async down(queryRunner) {
-        await queryRunner.query(`ALTER TABLE "queue_detail" RENAME TO "temporary_queue_detail"`);
-        await queryRunner.query(`CREATE TABLE "queue_detail" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "version" integer NOT NULL DEFAULT (1), "createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "queueNumber" varchar(255) NOT NULL, "minEstimatedTime" varchar(255) NOT NULL, "creationTime" varchar(255), "user_id" integer, "eventId" integer)`);
-        await queryRunner.query(`INSERT INTO "queue_detail"("id", "version", "createdAt", "updatedAt", "queueNumber", "minEstimatedTime", "creationTime", "user_id", "eventId") SELECT "id", "version", "createdAt", "updatedAt", "queueNumber", "minEstimatedTime", "creationTime", "user_id", "eventId" FROM "temporary_queue_detail"`);
-        await queryRunner.query(`DROP TABLE "temporary_queue_detail"`);
+        console.log(queryRunner);
         await queryRunner.query(`DROP TABLE "queue_detail"`);
         await queryRunner.query(`DROP TABLE "event"`);
         await queryRunner.query(`DROP TABLE "user"`);

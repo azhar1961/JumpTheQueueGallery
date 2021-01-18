@@ -17,8 +17,6 @@ export class EventsService {
   constructor(private http:HttpClient) { }
   
 
-  
-  
  getEvents():Observable<Event[]>{
   console.log("get event service");
   return this.http.get<Event[]>(`${this.baseUrl}`+'/event/events');

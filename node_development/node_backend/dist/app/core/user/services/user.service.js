@@ -51,7 +51,7 @@ let UserService = class UserService {
         }
     }
     async getUsers() {
-        return this.userRepository.findAndCount();
+        return await this.userRepository.findAndCount();
     }
 };
 UserService = __decorate([
